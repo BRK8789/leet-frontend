@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 240 6% 6%;         /* #09090b */
+    --foreground: 0 0% 98%;
+    --card: 240 5% 10%;              /* #18181b */
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 24 95% 53%;           /* orange 500 */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 16%;            /* zinc-800 */
+    --input: 240 4% 16%;
+    --ring: 24 95% 53%;
+    --chart-1: 158 64% 52%;          /* emerald */
+    --chart-2: 43 96% 56%;           /* amber */
+    --chart-3: 348 89% 60%;          /* rose */
+    --chart-4: 217 91% 60%;
+    --chart-5: 24 95% 53%;
+    --radius: 0.25rem;
+  }
+  .dark {
+    --background: 240 6% 6%;
+    --foreground: 0 0% 98%;
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 24 95% 53%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body, #root {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .mono, code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+}
+
+/* Utility classes */
+.label-upper {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* Heatmap cells */
+.heat-0 { background: #18181b; }
+.heat-1 { background: #14532d; }
+.heat-2 { background: #166534; }
+.heat-3 { background: #16a34a; }
+.heat-4 { background: #34d399; }
+
+/* No universal transitions */
+.link-hover { transition: color 200ms ease, background-color 200ms ease; }
