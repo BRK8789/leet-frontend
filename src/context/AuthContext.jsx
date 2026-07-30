@@ -22,6 +22,9 @@ export function AuthProvider({ children }) {
     setError(null);
     try {
       const { data } = await api.post("/auth/login", { email, password });
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+      }
       setUser(data.user);
       return data.user;
     } catch (e) {
@@ -33,6 +36,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try { await api.post("/auth/logout"); } catch {}
+    localStorage.removeItem("token");
     setUser(false);
   };
 
