@@ -11,11 +11,11 @@ export default function Leaderboard() {
   const [scope, setScope] = useState(user?.role === "faculty" ? "my" : "college");
   const [limit, setLimit] = useState(50);
 
-  const load = async () => {
+  const load = React.useCallback(async () => {
     const { data } = await api.get("/leaderboard", { params: { scope, limit } });
     setRows(data);
-  };
-  useEffect(() => { load(); /* eslint-disable-next-line */ }, [scope, limit]);
+  }, [scope, limit]);
+  useEffect(() => { load(); }, [load]);
 
   const rankStyle = (r) => {
     if (r === 1) return "text-amber-300 font-black";

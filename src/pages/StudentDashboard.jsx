@@ -15,15 +15,16 @@ export default function StudentDashboard() {
   const [saving, setSaving] = useState(false);
   const [syncing, setSyncing] = useState(false);
 
-  const load = async () => {
+  const load = React.useCallback(async () => {
+    if (!user?.id) return;
     try {
       const { data } = await api.get(`/students/${user.id}`);
       setData(data);
       setUname(data.leetcode_username || "");
     } catch (e) { console.error(e); }
-  };
+  }, [user?.id]);
 
-  useEffect(() => { load(); /* eslint-disable-next-line */ }, []);
+  useEffect(() => { load(); }, [load]);
 
   const saveUsername = async () => {
     setSaving(true);

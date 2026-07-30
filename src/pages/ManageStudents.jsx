@@ -29,11 +29,12 @@ export default function ManageStudents() {
   const [form, setForm] = useState({ ...empty });
   const [csvFile, setCsvFile] = useState(null);
 
-  const load = async () => {
+  const load = React.useCallback(async () => {
     const { data } = await api.get("/students", { params: { q, limit: 500 } });
     setItems(data.items); setTotal(data.total);
-  };
-  const loadDicts = async () => {
+  }, [q]);
+
+  const loadDicts = React.useCallback(async () => {
     const [d, b, s, f] = await Promise.all([
       api.get("/departments"),
       api.get("/branches"),
@@ -41,9 +42,10 @@ export default function ManageStudents() {
       isFaculty ? Promise.resolve({ data: [] }) : api.get("/faculty"),
     ]);
     setDeps(d.data); setBranches(b.data); setSections(s.data); setFaculty(f.data);
-  };
-  useEffect(() => { loadDicts(); }, []); /* eslint-disable-line */
-  useEffect(() => { const t = setTimeout(load, 300); return () => clearTimeout(t); }, [q]); /* eslint-disable-line */
+  }, [isFaculty]);
+
+  useEffect(() => { loadDicts(); }, [loadDicts]);
+  useEffect(() => { const t = setTimeout(load, 300); return () => clearTimeout(t); }, [load]);
 
   const save = async () => {
     try {
